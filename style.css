@@ -1,0 +1,74 @@
+:root {
+  --bg:     #173829;
+  --text:   #d9d4c4;
+  --muted:  #8fa396;
+  --gold:   #e0a458;
+  --line:   #2a4c3c;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font: 15px/1.7 ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 40px 22px 120px;
+}
+
+/* top image */
+img.top {
+  width: 100%;
+  display: block;
+  border: 1px solid var(--line);
+  /* dull the photo so it blends with the muted page:
+     saturate <1 = less colorful · brightness <1 = darker · opacity <1 lets the green bg tint it */
+  filter: saturate(0.7) brightness(0.75);
+  opacity: 0.9;
+}
+.caption { color: var(--muted); font-size: 12.5px; margin: 8px 0 0; }
+
+/* title */
+h1 {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.4;
+  margin: 34px 0 0;
+}
+
+/* body text */
+p { margin: 20px 0 0; }
+.muted { color: var(--muted); }
+
+/* key/value meta block — boxed as a little terminal panel */
+.meta {
+  margin: 24px 0 0;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.025);
+}
+.meta div { margin: 2px 0; }
+.meta .k { color: var(--muted); display: inline-block; min-width: 88px; }
+
+/* section heading — one grammar, repeated per section */
+h2 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 38px 0 10px;
+}
+.hash { color: var(--muted); }
+
+/* organizers list */
+.people div { margin: 3px 0; }
+
+/* links */
+a { color: var(--gold); text-decoration: underline; text-underline-offset: 3px; }
+a:hover { background: var(--gold); color: var(--bg); text-decoration: none; }
+
+/* keeps the muted color instead of the gold link styling */
+a.plain { color: var(--muted); }
+a.plain:hover { background: none; color: var(--text); text-decoration: underline; }
+
+.prompt { color: var(--muted); }
