@@ -8,6 +8,8 @@
 </head>
 <body>
 
+  <div class="forest-shade" aria-hidden="true"></div>
+
   <img class="top" src="assets/lodge-hero.jpg" alt="Rainbow Lodge, surrounded by forest" />
   <p class="caption"><a class="plain" href="https://www.rainbowlodge.org/" target="_blank" rel="noopener">rainbow lodge</a> — north bend, wa</p>
 
@@ -38,5 +40,11 @@
     <div>Henry Corrigan-Gibbs<span class="muted"> · UC Berkeley</span></div>
   </div>
 
+  <!-- decrypt-on-load reveal (no defer: runs before first paint so nothing flashes) -->
+  <script src="decrypt-page.js"></script>
+
+  <!-- playful effects — each is independent; remove any <script> to disable it -->
+  <script src="trees.js" defer></script>
+  <script src="cursor.js" defer></script>
 </body>
 </html>

@@ -72,3 +72,55 @@ a.plain { color: var(--muted); }
 a.plain:hover { background: none; color: var(--text); text-decoration: underline; }
 
 .prompt { color: var(--muted); }
+
+/* ---- decorative: forest around the clearing (built by trees.js) ---- */
+.forest-shade {
+  position: fixed;
+  inset: 0;
+  z-index: -1;                        /* above the trees, below the content */
+  pointer-events: none;
+  /* bright clearing in the middle, deep-woods shadow at the screen edges */
+  background: radial-gradient(120% 100% at 50% 42%, transparent 20%, rgba(9, 28, 20, 0.55) 100%);
+}
+.gutter, .canopy {
+  position: fixed;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -2;                        /* behind the shade + content, above the background */
+}
+.gutter { top: 0; bottom: 0; width: calc((100vw - 700px) / 2); }   /* the empty margin beside the column */
+.gutter-l { left: 0; }
+.gutter-r { right: 0; }
+.gutter pre {
+  position: absolute;                 /* back + front depth layers stack in place */
+  top: 0;
+  margin: 0;
+  font: 12px/1.4 ui-monospace, Menlo, monospace;   /* line-height must match LINE_H in trees.js */
+}
+.gutter-l pre { left: 0; }            /* forest hugs the left screen edge  */
+.gutter-r pre { right: 0; }           /* forest hugs the right screen edge */
+/* two-tone depth: far trees dim, near trees brighter */
+.depth-back  { color: #55705f;      opacity: 0.28; }
+.depth-front { color: var(--muted); opacity: 0.3; }
+
+/* canopy peeking into the top-left corner of the clearing */
+.canopy { top: 0; height: 130px; left: calc((100vw - 700px) / 2 - 66px); }
+.canopy pre { margin: 0; font: 12px/1.4 ui-monospace, Menlo, monospace; color: var(--muted); opacity: 0.24; }
+
+@media (max-width: 899px) {
+  .gutter, .canopy, .forest-shade { display: none; }
+}
+
+/* ---- playful: custom terminal cursor (desktop + motion-ok only; driven by cursor.js) ---- */
+@media (hover: hover) and (pointer: fine) {
+  html.cursor-fx, html.cursor-fx * { cursor: none; }
+}
+.caret {
+  position: fixed; top: 0; left: 0;
+  width: 7px; height: 16px;
+  background: var(--gold);
+  opacity: 0;                                   /* hidden until the mouse moves */
+  pointer-events: none;
+  z-index: 9999;
+}
+.caret.show { opacity: 1; }
