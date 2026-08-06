@@ -73,6 +73,48 @@ a.plain:hover { background: none; color: var(--text); text-decoration: underline
 
 .prompt { color: var(--muted); }
 
+/* application form (apply.html) */
+.form { margin-top: 30px; }
+.field { margin-top: 22px; }
+.field label { display: block; color: var(--muted); margin-bottom: 7px; }
+.field .req { color: var(--gold); }
+.field input, .field select, .field textarea {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--text);
+  font: inherit;                       /* inherit the monospace body font */
+  padding: 10px 12px;
+}
+.field textarea { min-height: 92px; line-height: 1.6; resize: vertical; }
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+  background: rgba(224, 164, 88, 0.06);
+}
+.field .hint { color: var(--muted); font-size: 12.5px; margin-top: 6px; }
+.hp { position: absolute; left: -9999px; opacity: 0; pointer-events: none; }   /* honeypot */
+
+.submit {
+  margin-top: 28px;
+  background: none;
+  border: 1px solid var(--gold);
+  border-radius: 6px;
+  color: var(--gold);
+  font: inherit;
+  font-weight: 600;
+  padding: 10px 22px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.submit:hover:not(:disabled) { background: var(--gold); color: var(--bg); }
+.submit:disabled { opacity: 0.55; cursor: default; }
+
+.form-status { margin-top: 16px; min-height: 1.2em; }
+.form-status.ok  { color: var(--gold); }
+.form-status.err { color: #d98b6a; }
+
 /* ---- decorative: forest around the clearing (built by trees.js) ---- */
 .forest-shade {
   position: fixed;
@@ -110,17 +152,3 @@ a.plain:hover { background: none; color: var(--text); text-decoration: underline
 @media (max-width: 899px) {
   .gutter, .canopy, .forest-shade { display: none; }
 }
-
-/* ---- playful: custom terminal cursor (desktop + motion-ok only; driven by cursor.js) ---- */
-@media (hover: hover) and (pointer: fine) {
-  html.cursor-fx, html.cursor-fx * { cursor: none; }
-}
-.caret {
-  position: fixed; top: 0; left: 0;
-  width: 7px; height: 16px;
-  background: var(--gold);
-  opacity: 0;                                   /* hidden until the mouse moves */
-  pointer-events: none;
-  z-index: 9999;
-}
-.caret.show { opacity: 1; }

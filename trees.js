@@ -80,20 +80,47 @@
 
   const el = (tag, cls) => { const e = document.createElement(tag); if (cls) e.className = cls; e.setAttribute('aria-hidden', 'true'); return e; };
 
-  function makeGutter(side) {
+  // ── persistence: keep the same forest across in-site link navigation, but grow
+  //    a fresh one on refresh or when arriving from elsewhere ──────────────────
+  const KEY = 'retreat-forest';
+
+  function generate() {
+    return { w: window.innerWidth, h: window.innerHeight, l: scene('l'), r: scene('r'), canopy: canopy() };
+  }
+  const save = (d) => { try { sessionStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {} };
+  const load = () => { try { return JSON.parse(sessionStorage.getItem(KEY)); } catch (e) { return null; } };
+  const fits = (d) => d && d.w === window.innerWidth && d.h === window.innerHeight
+                        && d.l && d.r && typeof d.canopy === 'string';
+
+  function cameFromSameSite() {
+    const nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+    const type = nav ? nav.type : '';
+    if (type === 'reload') return false;              // refresh → regenerate
+    if (type === 'back_forward') return true;         // history nav → reuse
+    try { return !!document.referrer && new URL(document.referrer).origin === location.origin; }
+    catch (e) { return false; }                       // external visit → regenerate
+  }
+
+  // reuse the stored forest only for same-site navigation and a matching viewport
+  function forestData() {
+    let d = cameFromSameSite() ? load() : null;
+    if (!fits(d)) { d = generate(); save(d); }
+    return d;
+  }
+
+  function makeGutter(side, d) {
     const aside = el('aside', 'gutter gutter-' + side);
     const back = el('pre', 'depth-back'), front = el('pre', 'depth-front');
-    const s = scene(side);
-    back.textContent = s.back; front.textContent = s.front;
+    back.textContent = d[side].back; front.textContent = d[side].front;
     aside.append(back, front);
     document.body.appendChild(aside);
     return { aside, back, front, side };
   }
 
-  function makeCanopy(side) {
+  function makeCanopy(side, d) {
     const aside = el('aside', 'canopy canopy-' + side);
     const pre = el('pre');
-    pre.textContent = canopy();
+    pre.textContent = d.canopy;
     aside.appendChild(pre);
     document.body.appendChild(aside);
     return { aside, pre };
@@ -103,16 +130,19 @@
 
   function build() {
     if (gutters.length) return;
-    gutters = [makeGutter('l'), makeGutter('r')];
-    canopies = [makeCanopy('l')];   // one canopy, top-left — an intentional asymmetric accent
+    const d = forestData();
+    gutters = [makeGutter('l', d), makeGutter('r', d)];
+    canopies = [makeCanopy('l', d)];   // one canopy, top-left — an intentional asymmetric accent
   }
   function destroy() {
     [...gutters, ...canopies].forEach((o) => o.aside.remove());
     gutters = []; canopies = [];
   }
   function refill() {
-    for (const gtr of gutters) { const s = scene(gtr.side); gtr.back.textContent = s.back; gtr.front.textContent = s.front; }
-    for (const c of canopies) c.pre.textContent = canopy();
+    if (!gutters.length) return;
+    const d = generate(); save(d);            // new forest for the new size; store it for later nav
+    for (const gtr of gutters) { gtr.back.textContent = d[gtr.side].back; gtr.front.textContent = d[gtr.side].front; }
+    for (const c of canopies) c.pre.textContent = d.canopy;
   }
 
   const apply = (e) => (e.matches ? build() : destroy());

@@ -4,6 +4,21 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Applied Crypto Student Retreat</title>
+<meta name="description" content="A two-day retreat for PhD students in applied cryptography, immediately before and co-located with Real World Crypto 2027 near Seattle." />
+
+<!-- Social preview (Open Graph + Twitter). NOTE: og:url and og:image must be
+     ABSOLUTE urls — replace REPLACE_WITH_YOUR_DOMAIN once the site is hosted. -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Applied Crypto Student Retreat" />
+<meta property="og:description" content="Two days in the forest with ~25 fellow PhD students, right before Real World Crypto 2027." />
+<meta property="og:url" content="https://REPLACE_WITH_YOUR_DOMAIN/" />
+<meta property="og:image" content="https://REPLACE_WITH_YOUR_DOMAIN/assets/lodge-hero.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Applied Crypto Student Retreat" />
+<meta name="twitter:description" content="Two days in the forest with ~25 fellow PhD students, right before Real World Crypto 2027." />
+<meta name="twitter:image" content="https://REPLACE_WITH_YOUR_DOMAIN/assets/lodge-hero.jpg" />
+
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -15,10 +30,10 @@
 
   <h1>Applied Crypto Student Retreat</h1>
 
-  <p>A two-day retreat for PhD students in applied cryptography
+  <p>A two-day retreat in the forest for PhD students in applied crypto
     to share their work, discuss new research ideas, and build community.
     The retreat is immediately before and co-located with
-    <a class="plain" href="https://rwc.iacr.org/2027" target="_blank" rel="noopener">Real World Crypto 2027</a>.
+    <a class="plain" href="https://rwc.iacr.org/2027" target="_blank" rel="noopener">RWC 2027</a>.
   </p>
 
   <div class="meta">
@@ -28,7 +43,7 @@
     <div><span class="k">cost</span> room &amp; board covered</div>
   </div>
 
-  <p><span class="prompt">&gt;</span> apply for a spot <a href="#">here</a>!</p>
+  <p><span class="prompt">&gt;</span> apply for a spot <a href="apply.html">here</a>!</p>
   <p><span class="prompt">&gt;</span> questions? Email
     <a href="mailto:ryanleh@berkeley.edu">Ryan</a> and
     <a href="mailto:edauterman@cs.stanford.edu">Emma</a>.</p>
@@ -43,8 +58,7 @@
   <!-- decrypt-on-load reveal (no defer: runs before first paint so nothing flashes) -->
   <script src="decrypt-page.js"></script>
 
-  <!-- playful effects — each is independent; remove any <script> to disable it -->
-  <script src="trees.js" defer></script>
-  <script src="cursor.js" defer></script>
+  <!-- ambient forest (no defer: runs before first paint so the trees don't pop in) -->
+  <script src="trees.js"></script>
 </body>
 </html>

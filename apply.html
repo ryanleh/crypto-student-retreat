@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Apply · Applied Crypto Student Retreat</title>
+<meta name="description" content="Apply to the Applied Crypto Student Retreat — two days before Real World Crypto 2027." />
+
+<!-- Social preview. NOTE: og:url and og:image must be ABSOLUTE urls —
+     replace REPLACE_WITH_YOUR_DOMAIN once the site is hosted. -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Apply · Applied Crypto Student Retreat" />
+<meta property="og:description" content="Request a spot at the retreat — two days in the forest before Real World Crypto 2027." />
+<meta property="og:url" content="https://REPLACE_WITH_YOUR_DOMAIN/apply.html" />
+<meta property="og:image" content="https://REPLACE_WITH_YOUR_DOMAIN/assets/lodge-hero.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://REPLACE_WITH_YOUR_DOMAIN/assets/lodge-hero.jpg" />
+
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="forest-shade" aria-hidden="true"></div>
+
+  <p class="caption"><a class="plain" href="index.html">&larr; back to the retreat</a></p>
+
+  <h1>Request a spot</h1>
+
+  <p class="muted">[Deadline TBD].</p>
+
+  <form id="apply-form" class="form" action="https://api.web3forms.com/submit" method="POST">
+    <!-- Web3Forms — replace with your access key from https://web3forms.com -->
+    <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+    <input type="hidden" name="subject" value="New retreat application" />
+    <input type="hidden" name="from_name" value="Pre-RWC Student Retreat" />
+    <!-- honeypot: bots fill this in, humans can't see it -->
+    <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" />
+
+    <div class="field">
+      <label for="name">name <span class="req">*</span></label>
+      <input id="name" name="name" type="text" autocomplete="name" required />
+    </div>
+
+    <div class="field">
+      <label for="email">email <span class="req">*</span></label>
+      <input id="email" name="email" type="email" autocomplete="email" required />
+    </div>
+
+    <div class="field">
+      <label for="institution">institution <span class="req">*</span></label>
+      <input id="institution" name="institution" type="text" required />
+    </div>
+
+    <div class="field">
+      <label for="advisor">advisor <span class="req">*</span></label>
+      <input id="advisor" name="advisor" type="text" required />
+    </div>
+
+    <div class="field">
+      <label for="year">year in PhD <span class="req">*</span></label>
+      <input id="year" name="year" type="text" required />
+    </div>
+
+    <div class="field">
+      <label for="research">what do you work on? <span class="req">*</span></label>
+      <input id="research" name="research" type="text" required />
+    </div>
+
+    <div class="field">
+      <label for="proposal">describe a short discussion you'd be interested in leading <span class="req">*</span></label>
+      <textarea id="proposal" name="proposal" required></textarea>
+    </div>
+
+    <div class="field">
+      <label for="goals">what are you hoping to get out of the retreat? <span class="req">*</span></label>
+      <textarea id="goals" name="goals" required></textarea>
+    </div>
+
+    <div class="field">
+      <label for="notes">anything else? <span class="muted">(optional)</span></label>
+      <textarea id="notes" name="notes"></textarea>
+    </div>
+
+    <button type="submit" class="submit">&gt; submit application</button>
+    <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+  </form>
+
+  <!-- no defer: runs before first paint so the trees don't pop in -->
+  <script src="trees.js"></script>
+  <script src="apply.js" defer></script>
+</body>
+</html>
