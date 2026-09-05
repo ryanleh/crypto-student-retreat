@@ -63,6 +63,18 @@ h2 {
 /* organizers list */
 .people div { margin: 3px 0; }
 
+/* funding acknowledgement — small, italic, dimmed gold sign-off */
+.ack {
+  display: block;
+  margin-top: 30px;
+  max-width: 60ch;
+  font-size: 12.5px;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--gold);
+  opacity: 0.6;                 /* dim so it warms without reading as a link; use var(--muted) + opacity:1 to recede */
+}
+
 /* links */
 a { color: var(--gold); text-decoration: underline; text-underline-offset: 3px; }
 a:hover { background: var(--gold); color: var(--bg); text-decoration: none; }
